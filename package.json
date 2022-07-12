@@ -20,6 +20,12 @@
   },
   "homepage": "https://github.com/hegner123/sql-crud#readme",
   "dependencies": {
-    "fastify": "^4.2.0"
+    "@fastify/formbody": "^7.0.1",
+    "@fastify/static": "^6.4.0",
+    "dotenv": "^16.0.1",
+    "fastify": "^4.2.0",
+    "mysql2": "^2.3.3",
+    "path": "^0.12.7",
+    "sequelize": "^6.21.3"
   }
 }

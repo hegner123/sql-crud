@@ -1,0 +1,70 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 90vh;
+    margin: 0;
+    padding: 0;
+}
+
+header>*,
+main>*,
+footer>* {
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+main form {
+    margin: 1rem;
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    gap: 1rem;
+}
+
+
+.post-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    margin: 0 1.75rem;
+    gap: 2rem;
+}
+
+.post-grid .card {
+    display: grid;
+    grid-template-rows: 4rem 1fr;
+    grid-template-columns: 1fr 1fr;
+    background: #ccc;
+    padding: 1rem;
+    border-radius: 5px;
+}
+
+.card h3 {
+    grid-column: 1;
+    grid-row: 1;
+    justify-self: flex-start;
+    align-self: start;
+    margin: 0;
+}
+
+.card>button {
+    grid-column: 2;
+    grid-row: 1;
+    height: 2rem;
+    width: fit-content;
+    justify-self: flex-end;
+    align-self: start;
+}
+
+.card>button:hover {
+    cursor: pointer;
+
+}
+
+
+
+.card p {
+    grid-column: 1/-1;
+    grid-row: 2;
+}
