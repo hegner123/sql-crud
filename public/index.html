@@ -14,9 +14,10 @@
         <h1>SQL Crud</h1>
     </header>
     <main>
-        <form action="http://localhost:3000/api/post" method="post">
+
+        <form name="post-form" class="create-post" data-listener="false">
             <label for="post-body">New Post Body</label>
-            <textarea name="body" id="post-body" cols="30" rows="10"></textarea>
+            <textarea name="post-body" id="post-body" cols="30" rows="10" class="textarea"></textarea>
             <input type="submit" value="Submit">
         </form>
 

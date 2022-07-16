@@ -5,6 +5,8 @@ import Fastify from "fastify";
 import path from "path";
 import fastifyStatic from "@fastify/static";
 import fastifyForm from "@fastify/formbody";
+import fastifyCors from "@fastify/cors";
+
 const __dirname = url.fileURLToPath(new URL(".", import.meta.url));
 
 const fastify = Fastify({
@@ -12,18 +14,22 @@ const fastify = Fastify({
 });
 
 fastify.register(fastifyStatic, {
-  root: path.join(__dirname, "public"),
-  prefix: "/public/",
+  root: path.join(__dirname, "my-app/dist"),
+  prefix: "/dist/",
 });
 
 fastify.register(fastifyForm);
+fastify.register(fastifyCors);
 
 fastify.get("/", async function (request, reply) {
   return reply.sendFile("index.html");
 });
 
 fastify.get("/:file", async function (request, reply) {
-  return reply.sendFile(`${request.params.file}`);
+  return reply.sendFile(`/${request.params.file}`);
+});
+fastify.get("/assets/:file", async function (request, reply) {
+  return reply.sendFile(`assets/${request.params.file}`);
 });
 
 fastify.get("/api", async function (request, reply) {
@@ -35,7 +41,8 @@ fastify.get("/api/post", async function (request, reply) {
   reply.redirect("/");
 });
 fastify.post("/api/post", async function (request, reply) {
-  const testNote = await Note.create({ body: request.body["post-body"] });
+  const parsedData = JSON.parse(request.body);
+  const testNote = await Note.create({ body: parsedData.body });
   reply.send(testNote);
 });
 

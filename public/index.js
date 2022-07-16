@@ -13,6 +13,25 @@ function loadNotes() {
                                   <p class="card-body">${note.body}</p>`;
       postRoot.appendChild(card);
     });
+    const formSubmit = document.querySelector(".create-post");
+
+    if (formSubmit.getAttribute("listener") !== "true") {
+      formSubmit.addEventListener("submit", submitForm);
+      formSubmit.setAttribute("data-listener", "true");
+    }
+
+    async function submitForm(e) {
+      e.preventDefault();
+      const postBody = document.querySelector(".textarea");
+      const data = JSON.stringify({ body: postBody.value });
+      const response = await fetch(`/api/post`, {
+        method: "POST", // *GET, POST, PUT, DELETE, etc.
+        referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+        body: data,
+      });
+      response.then(reloadNotes());
+    }
+    // }
 
     const deleteButtons = document.querySelectorAll(".delete-button");
     deleteButtons.forEach((buttons) => {
@@ -32,9 +51,6 @@ function loadNotes() {
       reloadNotes();
     }
 
-    async function createPost(){
-        
-    }
     function reloadNotes() {
       const postRoot = document.querySelector("#post-grid");
       postRoot.innerHTML = "";
