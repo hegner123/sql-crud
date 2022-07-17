@@ -21,6 +21,10 @@ fastify.register(fastifyStatic, {
 fastify.register(fastifyForm);
 fastify.register(fastifyCors);
 
+fastify.get("/", async function (request, reply) {
+  console.log("get /api");
+  reply.send({ body: "/api" });
+});
 fastify.get("/api", async function (request, reply) {
   try {
     const notes = await Note.findAll();
@@ -31,10 +35,6 @@ fastify.get("/api", async function (request, reply) {
   }
 });
 
-fastify.get("/api", async function (request, reply) {
-  console.log("get /api");
-  reply.send({ body: "/api" });
-});
 fastify.post("/api/post", async function (request, reply) {
   try {
     const parsedData = JSON.parse(request.body);
