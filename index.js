@@ -21,16 +21,6 @@ fastify.register(fastifyStatic, {
 fastify.register(fastifyForm);
 fastify.register(fastifyCors);
 
-fastify.get("/", async function (request, reply) {
-  return reply.sendFile("index.html");
-});
-
-fastify.get("/:file", async function (request, reply) {
-  return reply.sendFile(`/${request.params.file}`);
-});
-fastify.get("/assets/:file", async function (request, reply) {
-  return reply.sendFile(`assets/${request.params.file}`);
-});
 
 fastify.get("/api", async function (request, reply) {
   const notes = await Note.findAll();
