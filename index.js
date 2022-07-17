@@ -31,9 +31,10 @@ fastify.get("/api", async function (request, reply) {
   }
 });
 
-// fastify.get("/api/post", async function (request, reply) {
-//   reply.redirect("/");
-// });
+fastify.get("/api", async function (request, reply) {
+  console.log("get /api");
+  reply.send({ body: "/api" });
+});
 fastify.post("/api/post", async function (request, reply) {
   try {
     const parsedData = JSON.parse(request.body);
