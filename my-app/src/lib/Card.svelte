@@ -12,7 +12,7 @@
       // console.log(post);
     //   Default options are marked with *
 
-      const response = await fetch(`http://localhost:3000/api/${id}`, {
+      const response = await fetch(`/api/${id}`, {
         method: "DELETE", // *GET, POST, PUT, DELETE, etc.
 
         referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url

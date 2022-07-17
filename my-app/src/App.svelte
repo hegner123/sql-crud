@@ -5,7 +5,7 @@
   export let promise
 
   async function fetchData (){
-    const postRes = await fetch('http://localhost:3000/api',{mode: 'cors',})
+    const postRes = await fetch('/api',{mode: 'cors',})
     
     if (postRes.ok) {
 			return postRes.json();
@@ -19,7 +19,7 @@
   async function handleSubmit() {
   
     const formattedData = JSON.stringify({ body: textAreaValue });
-    const response = await fetch(`http://localhost:3000/api/post`, {
+    const response = await fetch(`/api/post`, {
       method: "POST", 
       referrerPolicy: "no-referrer", 
       body: formattedData,

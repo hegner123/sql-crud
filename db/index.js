@@ -1,22 +1,19 @@
 // get the client
 import { Sequelize, Model, DataTypes } from "sequelize";
+const databaseDB = process.env.DB_DATABASE;
+const databaseUser = process.env.DB_USER;
+const databasePass = process.env.DB_PASSWORD;
 
-const sequelize = new Sequelize(
-  "sql_crud",
-  "sql_crud_u",
-  process.env.DB_PASSWORD,
-  {
-    host: "localhost",
-    dialect: "mysql",
-  }
-);
+const sequelize = new Sequelize(databaseDB, databaseUser, databasePass, {
+  host: "localhost",
+  dialect: "mysql",
+});
 
 export const Note = sequelize.define("Note", {
   body: DataTypes.STRING,
 });
 
 await sequelize.sync();
-
 
 try {
   await sequelize.authenticate();
