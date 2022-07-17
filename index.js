@@ -21,42 +21,61 @@ fastify.register(fastifyStatic, {
 fastify.register(fastifyForm);
 fastify.register(fastifyCors);
 
-
 fastify.get("/api", async function (request, reply) {
-  const notes = await Note.findAll();
-  reply.send({ notes: notes });
+  try {
+    const notes = await Note.findAll();
+    reply.send({ notes: notes });
+  } catch (error) {
+    const errorString = JSON.stringify(error);
+    reply.send({ error: errorString });
+  }
 });
 
-fastify.get("/api/post", async function (request, reply) {
-  reply.redirect("/");
-});
+// fastify.get("/api/post", async function (request, reply) {
+//   reply.redirect("/");
+// });
 fastify.post("/api/post", async function (request, reply) {
-  const parsedData = JSON.parse(request.body);
-  const testNote = await Note.create({ body: parsedData.body });
-  reply.send(testNote);
+  try {
+    const parsedData = JSON.parse(request.body);
+    const testNote = await Note.create({ body: parsedData.body });
+    reply.send(testNote);
+  } catch (error) {
+    const errorString = JSON.stringify(error);
+    reply.send({ error: errorString });
+  }
 });
 
 fastify.put("/api/:id", async function (request, reply) {
-  const updateId = request.params.id;
-  const updateNote = await Note.update(
-    { body: request.body },
-    {
-      where: {
-        id: updateId,
-      },
-    }
-  );
-  reply.send(updateNote);
+  try {
+    const updateId = request.params.id;
+    const updateNote = await Note.update(
+      { body: request.body },
+      {
+        where: {
+          id: updateId,
+        },
+      }
+    );
+    reply.send(updateNote);
+  } catch (error) {
+    const errorString = JSON.stringify(error);
+    reply.send({ error: errorString });
+  }
 });
 
 fastify.delete("/api/:id", async function (request, reply) {
-  const deleteId = request.params.id;
-  const deleteNote = await Note.destroy({
-    where: {
-      id: deleteId,
-    },
-  });
-  reply.send(deleteNote);
+  try {
+    const deleteId = request.params.id;
+    const deleteNote = await Note.destroy({
+      where: {
+        id: deleteId,
+      },
+    });
+    reply.send(deleteNote);
+  } catch (error) {
+    const errorString = JSON.stringify(error);
+    reply.send({ error: errorString });
+  }
 });
 
 // Run the server!
